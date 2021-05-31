@@ -5,6 +5,24 @@ from django.contrib.auth.models import User
 class Post(models.Model):
       title=models.CharField(max_length=100)
       content=models.TextField()
+      TAG_CHOICES = [
+            ('misc','Miscellaneous'),
+            ('fash', 'Fashion'),
+            ('food','Food'),
+            ('life','Lifestyle'),
+            ('music','Music'),
+            ('sports','Sports'),
+            ('health','Health'),
+            ('edu','Education'),
+            ('softw','Software'),
+            ('tech','Technology'),
+            ('fit','Fitness'),
+            ('crypto','Cryptocurrency'),
+            ('travel','Travel'),
+            ('pd','Personality Development'),
+            ('med','Medicine'),
+      ]
+      tag = models.CharField(max_length=6, choices=TAG_CHOICES, default='misc')
       date_posted=models.DateTimeField(default=timezone.now)
       author=models.ForeignKey(User,on_delete=models.CASCADE)
       
