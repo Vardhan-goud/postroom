@@ -7,25 +7,25 @@ class Post(models.Model):
       title=models.CharField(max_length=100)
       content=models.TextField()
       TAG_CHOICES = [
-            ('misc','Miscellaneous'),
-            ('fash', 'Fashion'),
-            ('food','Food'),
-            ('life','Lifestyle'),
-            ('music','Music'),
-            ('sports','Sports'),
-            ('health','Health'),
-            ('edu','Education'),
-            ('softw','Software'),
-            ('tech','Technology'),
-            ('fit','Fitness'),
-            ('crypto','Cryptocurrency'),
-            ('travel','Travel'),
-            ('pd','Personality Development'),
-            ('med','Medicine'),
-            ('show','shows'),
-            ('movie','movies')
+            ('Miscellaneous','Miscellaneous'),
+            ('Fashion', 'Fashion'),
+            ('Food','Food'),
+            ('Lifestyle','Lifestyle'),
+            ('Music','Music'),
+            ('Sports','Sports'),
+            ('Health','Health'),
+            ('Education','Education'),
+            ('Software','Software'),
+            ('Technology','Technology'),
+            ('Fitness','Fitness'),
+            ('Cryptocurrency','Cryptocurrency'),
+            ('Travel','Travel'),
+            ('Personality Development','Personality Development'),
+            ('Medicine','Medicine'),
+            ('shows','shows'),
+            ('movies','movies')
       ]
-      tag = models.CharField(max_length=6, choices=TAG_CHOICES, default='misc')
+      tag = models.CharField(max_length=25, choices=TAG_CHOICES, default='misc')
       date_posted=models.DateTimeField(default=timezone.now)
       author=models.ForeignKey(User,on_delete=models.CASCADE)
       
