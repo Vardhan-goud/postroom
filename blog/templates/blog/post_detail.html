@@ -16,7 +16,7 @@
                 {% endif %}
             </div>
             <h2 class="article-title">{{ object.title }}</h2>
-            <a href="#" class="text-secondary">#{{object.tag}}</a>
+            <a href="{% url 'tag-posts' object.tag %}" class="text-secondary">#{{object.tag}}</a>
             <br><br>
             <p class="article-content">{{ object.content }}</p>
         </div>

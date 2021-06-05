@@ -22,8 +22,7 @@ class Post(models.Model):
             ('Travel','Travel'),
             ('Personality Development','Personality Development'),
             ('Medicine','Medicine'),
-            ('shows','shows'),
-            ('movies','movies')
+            ('Entertainment','Entertainment'),
       ]
       tag = models.CharField(max_length=25, choices=TAG_CHOICES, default='misc')
       date_posted=models.DateTimeField(default=timezone.now)
