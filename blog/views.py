@@ -40,6 +40,7 @@ class TagPostListView(ListView):
 
 class PostDetailView(DetailView):
     model=Post
+    context_object_name = 'post'
 
 class PostCreateView(LoginRequiredMixin,CreateView):
     model=Post
