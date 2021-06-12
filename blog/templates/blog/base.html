@@ -30,10 +30,13 @@
                     aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                
                 <div class="collapse navbar-collapse" id="navbarToggle">
+                    
                     <div class="navbar-nav mr-auto">
                         <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
                     </div>
+                    
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
                         
@@ -70,9 +73,27 @@
                     <p class='text-muted'>You can put any information here you'd like.
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-light"><a href="/?page=1">Latest Posts</a></li>
-                        <li class="list-group-item list-group-item-light">My posts</li>
-                        <li class="list-group-item list-group-item-light">Search by tag</li>
-                        <li class="list-group-item list-group-item-light">Search by Username</li>
+                        <li class="list-group-item list-group-item-light">
+                            <form name="myform" method="GET" action="{% url 'search-tag' %}">
+                                <div class="input-group">
+                                    <input name="searchtag" type="text" placeholder="Search by tag name" class="form-control" />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-dark ">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                        <li class="list-group-item list-group-item-light">
+                            <form name="myform" method="GET" action="{% url 'search-user' %}">
+                                <div class="input-group">
+                                    <input name="searchuser" type="text" placeholder="Search by User name" class="form-control " />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-dark ">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
+                        <li class="list-group-item list-group-item-light">About Us</li>
                     </ul>
                     </p>
                 </div>

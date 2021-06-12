@@ -3,6 +3,7 @@ from django.views.generic import ListView,DetailView,CreateView,UpdateView,Delet
 from .models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 
 
 def home(request):
@@ -10,6 +11,27 @@ def home(request):
         'posts':Post.objects.all()
     }
     return render(request,'blog/home.html',context)
+
+def search_tag(request):   
+    searchtag = request.GET.get('searchtag')
+    posts = Post.objects.filter(tag__icontains=searchtag)
+    
+    if(searchtag==""):
+        return render(request,'blog/home.html',{'posts':posts})
+    elif (posts):
+        return render(request,"blog/search_tag.html",{"searchtag":searchtag,"posts":posts})
+    else:
+        return render(request,"blog/nocontent.html",{"searchtag":searchtag})
+
+def search_user(request):
+    searchuser = request.GET.get('searchuser')
+    posts = Post.objects.filter(author__username__icontains=searchuser)
+    if(searchuser==""):
+        return render(request,'blog/home.html',{'posts':Post.objects.all()})
+    elif (posts):
+        return render(request,"blog/search_user.html",{"searchuser":searchuser,"posts":posts})
+    else:
+        return render(request,"blog/nocontent.html",{"searchuser":searchuser})
 
 class PostListView(ListView):
     model = Post
