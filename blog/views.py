@@ -1,16 +1,13 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
+from django.views.generic import TemplateView,ListView,DetailView,CreateView,UpdateView,DeleteView
 from .models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 
 
-def home(request):
-    context = {
-        'posts':Post.objects.all()
-    }
-    return render(request,'blog/home.html',context)
+class AboutView(TemplateView):
+    template_name="blog/about.html"
 
 class SearchByTagListView(ListView):
     model = Post
