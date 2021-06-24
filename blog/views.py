@@ -11,9 +11,8 @@ class AboutView(TemplateView):
 
 class SearchByTagListView(ListView):
     model = Post
-    template_name='blog/search_user.html'
+    template_name='blog/search_tag.html'
     context_object_name='posts'
-    paginate_by = 2
 
     def get_queryset(self):
         tag = self.request.GET.get('searchTag')
@@ -23,7 +22,6 @@ class SearchByUserNameListView(ListView):
     model = Post
     template_name='blog/search_user.html'
     context_object_name='posts'
-    paginate_by = 2
 
     def get_queryset(self):
         user = self.request.GET.get('searchUser')
