@@ -1,37 +1,34 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
+from django.views.generic import TemplateView,ListView,DetailView,CreateView,UpdateView,DeleteView
 from .models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 
 
-def home(request):
-    context = {
-        'posts':Post.objects.all()
-    }
-    return render(request,'blog/home.html',context)
+class AboutView(TemplateView):
+    template_name="blog/about.html"
 
-def search_tag(request):   
-    searchtag = request.GET.get('searchtag')
-    posts = Post.objects.filter(tag__icontains=searchtag)
-    
-    if(searchtag==""):
-        return render(request,'blog/home.html',{'posts':posts})
-    elif (posts):
-        return render(request,"blog/search_tag.html",{"searchtag":searchtag,"posts":posts})
-    else:
-        return render(request,"blog/nocontent.html",{"searchtag":searchtag})
+class SearchByTagListView(ListView):
+    model = Post
+    template_name='blog/search_user.html'
+    context_object_name='posts'
+    paginate_by = 2
 
-def search_user(request):
-    searchuser = request.GET.get('searchuser')
-    posts = Post.objects.filter(author__username__icontains=searchuser)
-    if(searchuser==""):
-        return render(request,'blog/home.html',{'posts':Post.objects.all()})
-    elif (posts):
-        return render(request,"blog/search_user.html",{"searchuser":searchuser,"posts":posts})
-    else:
-        return render(request,"blog/nocontent.html",{"searchuser":searchuser})
+    def get_queryset(self):
+        tag = self.request.GET.get('searchTag')
+        return Post.objects.filter(tag__icontains=tag)
+
+class SearchByUserNameListView(ListView):
+    model = Post
+    template_name='blog/search_user.html'
+    context_object_name='posts'
+    paginate_by = 2
+
+    def get_queryset(self):
+        user = self.request.GET.get('searchUser')
+        return Post.objects.filter(author__username__icontains=user)
+
 
 class PostListView(ListView):
     model = Post

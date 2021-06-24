@@ -1,13 +1,16 @@
-<article class="media content-section">
+<article class="media content-section rounded-5 rounded shadow-lg">
     <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
     <div class="media-body">
-        <div class="article-metadata">
-            <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
-            <small class="text-muted">{{ post.date_posted | date:"F d, Y" }}</small> 
+        <div class=" bg-secondary p-2 border rounded-pill text-center ">
+            <a class="mr-2 text-white" style="font-size:20px;" title =" get all posts of this user" href="{% url 'post-detail' post.id %}">{{ post.title }}</a>
+            <!-- <small class="text-white">{{ post.date_posted | date:"F d, Y" }}</small>  -->
         </div>
-        <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-        <a href="{% url 'tag-posts' post.tag %}" class="text-secondary">#{{post.tag}}</a>
-        <br><br>
-        <p class="article-content">{{ post.content }}</p>
+
+        <div class="mb-4">
+            <a class="d-inline-flex bg-info p-2 px-3 mt-2 mr-2 text-white border rounded-pill text-center" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+            <a href="{% url 'tag-posts' post.tag %}" class="d-inline-flex bg-info p-2 px-3 mt-2 mr-2 text-white border rounded-pill text-center">#{{post.tag}}</a>
+            <span class="d-flex float-right mt-3 text-dark " style="font-weight:600;">{{ post.date_posted | date:"F d, Y" }}</span>
+        </div>
+        <p class="article-content" style="font-weight:600;">{{ post.content }}</p>
     </div>
 </article>
