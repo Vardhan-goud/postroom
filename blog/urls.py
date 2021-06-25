@@ -1,16 +1,16 @@
 from django.urls import path
 from . import views
-from .views import PostListView,PostDetailView,PostCreateView,PostUpdateView,PostDeleteView,UserPostListView,TagPostListView,SearchByUserNameListView,SearchByTagListView,AboutView
+from . import views
 
 urlpatterns = [
-    path('',PostListView.as_view(), name="home" ),
-    path('about/',AboutView.as_view(), name="about" ),
-    path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
-    path('tag/<str:tag>', TagPostListView.as_view(), name='tag-posts'),
-    path('post/<int:pk>/',PostDetailView.as_view(),name="post-detail"),
-    path('post/new/',PostCreateView.as_view(),name="post-create"),
-    path('post/<int:pk>/update',PostUpdateView.as_view(),name="post-update"),
-    path('search_tag/', SearchByTagListView.as_view(), name='search-tag'),
-    path('search_user/', SearchByUserNameListView.as_view(), name='search-user'),
-    path('post/<int:pk>/delete',PostDeleteView.as_view(),name="post-delete"),
+    path('',views.PostListView.as_view(), name="home" ),
+    path('about/',views.AboutView.as_view(), name="about" ),
+    path('user/<str:username>', views.UserPostListView.as_view(), name='user-posts'),
+    path('tag/<str:tag>', views.TagPostListView.as_view(), name='tag-posts'),
+    path('post/<int:pk>/',views.PostDetailView.as_view(),name="post-detail"),
+    path('post/new/',views.PostCreateView.as_view(),name="post-create"),
+    path('post/<int:pk>/update',views.PostUpdateView.as_view(),name="post-update"),
+    path('search_tag/', views.searchByTag, name='search-tag'),
+    path('search_user/', views.searchByUser, name='search-user'),
+    path('post/<int:pk>/delete',views.PostDeleteView.as_view(),name="post-delete"),
 ]
