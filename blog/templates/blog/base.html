@@ -24,8 +24,7 @@
 <body>
     <header class="site-header">
         <nav class="navbar navbar-expand-sm navbar-dark bg-secondary fixed-top">
-            <div class="container">
-                <a class="navbar-brand" href="{% url 'home' %}">Post Room</a>
+                <a class="navbar-brand mx-3 " href="{% url 'home' %}">Post Room</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
                     aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -34,25 +33,24 @@
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     
                     <div class="navbar-nav mr-auto">
-                        <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
-                        <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
+                        <a class="nav-item nav-link ml-2" href="{% url 'home' %}"><i class="fas fa-home mr-2"></i>Home</a>
+                        <a class="nav-item nav-link ml-2" href="{% url 'about' %}"><i class="fas fa-info-circle mr-2"></i>About</a>
                     </div>
                     
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
                         <!-- login authentication check -->
                         {% if user.is_authenticated %}
-                        <a class=" nav-item nav-link " href="{% url 'user-posts' user.username %}">My Posts</a>
-                        <a class=" nav-item nav-link " href=" {% url 'post-create' %}">Create Post</a>
-                        <a class=" nav-item nav-link " href=" {% url 'profile' %}">Profile</a>
-                        <a class=" nav-item nav-link " href=" {% url 'logout' %}">Logout</a>
+                        <a class=" nav-item nav-link ml-2" href=" {% url 'post-create' %}"><i class="fas fa-plus-circle mr-2"></i>Create Post</a>
+                        <a class=" nav-item nav-link ml-2" href=" {% url 'profile' %}"><i class="fas fa-user-alt mr-2"></i>Profile</a>
+                        <a class=" nav-item nav-link ml-2 mr-4" href=" {% url 'logout' %}"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
                         {% else %}
-                        <a class = " nav-item nav-link " href=" {% url 'login' %}">Login</a>
-                        <a class = " nav-item nav-link " href=" {% url 'register' %} " > Register</a>
+                        <a class = " nav-item nav-link ml-2 " href=" {% url 'login' %}"><i class="fas  fa-sign-in-alt mr-2"></i> Login</a>
+                        <a class = " nav-item nav-link ml-2 mr-4" href=" {% url 'register' %} " > <i class="fas fa-user-plus mr-2"></i>Register</a>
                         {% endif %}
                     </div>
                 </div>
-            </div>
+            
         </nav>
         
     </header>
