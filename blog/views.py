@@ -9,14 +9,18 @@ from django.core.paginator import Paginator
 class AboutView(TemplateView):
     template_name="blog/about.html"
 
-class SearchByTagListView(ListView):
+'''class SearchByTagListView(ListView):
     model = Post
     template_name='blog/search_tag.html'
     context_object_name='posts'
 
     def get_queryset(self):
         tag = self.request.GET.get('searchTag')
-        return Post.objects.filter(tag__icontains=tag)
+        posts = Post.objects.filter(tag__icontains=tag)
+        if posts:
+            return posts
+        else:
+            return render
 
 class SearchByUserNameListView(ListView):
     model = Post
@@ -25,7 +29,7 @@ class SearchByUserNameListView(ListView):
 
     def get_queryset(self):
         user = self.request.GET.get('searchUser')
-        return Post.objects.filter(author__username__icontains=user)
+        return Post.objects.filter(author__username__icontains=user)'''
 
 
 class PostListView(ListView):
@@ -88,3 +92,19 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
             return True
         else :
             return False
+
+def searchByUser(request):
+    query = request.GET.get('searchUser')
+    posts = Post.objects.filter(author__username__icontains=query).order_by('-date_posted')
+    if posts:
+        return render(request,'blog/search_user.html',{'posts':posts,'query':query})
+    else:
+        return render(request,'blog/no_search_results.html',{'query':query})
+
+def searchByTag(request):
+    query = request.GET.get('searchTag')
+    posts = Post.objects.filter(tag__icontains=query).order_by('-date_posted')
+    if posts:
+        return render(request,'blog/search_tag.html',{'posts':posts,'query':query})
+    else:
+        return render(request,'blog/no_search_results.html',{'query':query})
