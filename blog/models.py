@@ -8,6 +8,7 @@ class Post(models.Model):
       content=models.TextField()
       TAG_CHOICES = [
             ('Miscellaneous','Miscellaneous'),
+            ('Covid19','Covid19'),
             ('Fashion', 'Fashion'),
             ('Food','Food'),
             ('Lifestyle','Lifestyle'),
