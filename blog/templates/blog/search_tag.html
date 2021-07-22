@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-  <h1 class="mb-3 text-secondary">Posts related to {{ searchtag }}</h1>
+  <h1 class="mb-3 text-secondary">Posts related to {{ tag }}</h1>
     {% for post in posts %}
     
         <article class="media content-section">
