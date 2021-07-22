@@ -9,39 +9,19 @@ from django.core.paginator import Paginator
 class AboutView(TemplateView):
     template_name="blog/about.html"
 
-class SearchByTagListView(ListView):
-    model = Post
-    template_name='blog/search_user.html'
-    context_object_name='posts'
-    paginate_by = 2
-
-    def get_queryset(self):
-        tag = self.request.GET.get('searchTag')
-        return Post.objects.filter(tag__icontains=tag)
-
-class SearchByUserNameListView(ListView):
-    model = Post
-    template_name='blog/search_user.html'
-    context_object_name='posts'
-    paginate_by = 2
-
-    def get_queryset(self):
-        user = self.request.GET.get('searchUser')
-        return Post.objects.filter(author__username__icontains=user)
-
 
 class PostListView(ListView):
     model = Post
     template_name='blog/home.html'
     ordering=['-date_posted']
     context_object_name='posts'
-    paginate_by = 2
+    paginate_by = 4
 
 class UserPostListView(ListView):
     model = Post
     template_name = 'blog/user_posts.html'
     context_object_name = 'posts'
-    paginate_by = 2
+    paginate_by = 4
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -51,7 +31,7 @@ class TagPostListView(ListView):
     model = Post
     template_name = 'blog/tag_posts.html'
     context_object_name = 'posts'
-    paginate_by = 2
+    paginate_by = 4
 
     def get_queryset(self):
         return Post.objects.filter(tag=self.kwargs['tag']).order_by('-date_posted')
@@ -90,3 +70,19 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
             return True
         else :
             return False
+
+def searchByUser(request):
+    query = request.GET.get('searchUser')
+    posts = Post.objects.filter(author__username__icontains=query).order_by('-date_posted')
+    if posts:
+        return render(request,'blog/search_user.html',{'posts':posts,'query':query})
+    else:
+        return render(request,'blog/no_search_results.html',{'query':query})
+
+def searchByTag(request):
+    query = request.GET.get('searchTag')
+    posts = Post.objects.filter(tag__icontains=query).order_by('-date_posted')
+    if posts:
+        return render(request,'blog/search_tag.html',{'posts':posts,'query':query})
+    else:
+        return render(request,'blog/no_search_results.html',{'query':query})
