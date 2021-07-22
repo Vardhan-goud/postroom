@@ -2,7 +2,7 @@
 
 {% block content %}
     {% for post in posts %}
-        {% include 'blog/post.html' with post=post %}
+        {% include 'blog/post.html' with post=post show_detail_link=True %}
     {% endfor %}
     
     {% if is_paginated %}

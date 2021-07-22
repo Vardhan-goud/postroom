@@ -9,41 +9,19 @@ from django.core.paginator import Paginator
 class AboutView(TemplateView):
     template_name="blog/about.html"
 
-'''class SearchByTagListView(ListView):
-    model = Post
-    template_name='blog/search_tag.html'
-    context_object_name='posts'
-
-    def get_queryset(self):
-        tag = self.request.GET.get('searchTag')
-        posts = Post.objects.filter(tag__icontains=tag)
-        if posts:
-            return posts
-        else:
-            return render
-
-class SearchByUserNameListView(ListView):
-    model = Post
-    template_name='blog/search_user.html'
-    context_object_name='posts'
-
-    def get_queryset(self):
-        user = self.request.GET.get('searchUser')
-        return Post.objects.filter(author__username__icontains=user)'''
-
 
 class PostListView(ListView):
     model = Post
     template_name='blog/home.html'
     ordering=['-date_posted']
     context_object_name='posts'
-    paginate_by = 2
+    paginate_by = 4
 
 class UserPostListView(ListView):
     model = Post
     template_name = 'blog/user_posts.html'
     context_object_name = 'posts'
-    paginate_by = 2
+    paginate_by = 4
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
@@ -53,7 +31,7 @@ class TagPostListView(ListView):
     model = Post
     template_name = 'blog/tag_posts.html'
     context_object_name = 'posts'
-    paginate_by = 2
+    paginate_by = 4
 
     def get_queryset(self):
         return Post.objects.filter(tag=self.kwargs['tag']).order_by('-date_posted')

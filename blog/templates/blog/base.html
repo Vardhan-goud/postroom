@@ -27,7 +27,7 @@
 <body>
     <header class="site-header">
         <nav class="navbar navbar-expand-sm navbar-dark bg-secondary fixed-top ">
-                <a class="navbar-brand mx-3 " style='font-family:pacifico;font-size:25px;' href="{% url 'home' %}"><img src="/media/logos/Logo.png" height="42px">Post Room</a>
+                <a class="navbar-brand mx-3 " style='font-family:pacifico;font-size:25px;' href="{% url 'home' %}"><img src="/media/logos/Logo.png" height="50px">Post Room</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
                     aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -73,9 +73,9 @@
                 <div class="content-section shadow">
                     <h3 class="text-center">Explore</h3>
                     <ul class="list-group">
-                        <li class="list-group-item list-group-item-light"><a href="/?page=1">Latest Posts</a></li>
-                        <li class="list-group-item list-group-item-light">  
-                            {% if user.is_authenticated %}<a href="{% url 'user-posts' user %}">My Posts</a>
+                        <li class="list-group-item text-center list-group-item-light"><a href="/?page=1" style="font-size: 20px;" title="View latest posts">Latest Posts</a></li>
+                        <li class="list-group-item text-center list-group-item-light" style="font-size: 20px;">  
+                            {% if user.is_authenticated %}<a href="{% url 'user-posts' user %}" title="View your posts">My Posts</a>
                             {% else %} <a href="{% url 'login' %}" title="login required">My Posts</a>
                             {% endif %}
                         </li>

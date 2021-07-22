@@ -29,6 +29,10 @@ ul {
   font-weight: 500;
 }
 
+.nav-item{
+  font-size: large;
+}
+
 .content-section {
   background: #ffffff;
   padding: 10px 20px;
