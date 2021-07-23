@@ -5,12 +5,19 @@
             <a class="mr-2 text-white" style="font-size:20px;" title ="View detailed post" href="{% url 'post-detail' post.id %}">{{ post.title }}</a>
             <small class="text-white">{{ post.date_posted | date:"F d, Y" }}</small>
         </div>-->
-        <h2 class="mt-1 text-capitalize"><a class="article-title" title ="View detailed post" {%if show_detail_link %} href="{% url 'post-detail' post.id %}"{%endif%}>{{ post.title }}</a></h2>
+        <h2 class="mt-1 text-capitalize"><a class="article-title" {% if show_detail_link %}title ="View detailed post"  href="{% url 'post-detail' post.id %}"{%endif%}>{{ post.title }}</a></h2>
         <div class="mb-3 article-metadata">
             <a class="d-inline-flex bg-info text-decoration-none p-1 px-3 mt-2 mr-2 text-white border rounded-pill text-center" title ="View posts by {{post.author.username }}" href="{% url 'user-posts' post.author.username %}"><i class="far fa-user mr-2 mt-1"></i>{{ post.author }}</a>
             <a href="{% url 'tag-posts' post.tag %}" title ="View posts related to {{post.tag}}" class="d-inline-flex bg-info text-decoration-none p-1 px-3 mt-2 mr-2 text-white border rounded-pill text-center"><i class="fas fa-tags mr-2 mt-1"></i>{{post.tag}}</a>
             <span class="d-flex float-right mt-3 text-muted" style="font-weight:600;">{{ post.date_posted | date:"F d, Y" }}</span>
         </div>
-        <p class="article-content" style="font-weight:600;">{{ post.content }}</p>
+        <p class="article-content" {% if show_detail_link %} style="display: -webkit-box;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;"{% endif %} style="font-weight:600;">{{ post.content }}</p>
+        {% if show_detail_link %}
+            <a href="{% url 'post-detail' post.id %}" >Read more</a>
+        {% endif %}
     </div>
 </article>
