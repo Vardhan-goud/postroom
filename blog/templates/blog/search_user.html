@@ -1,11 +1,10 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<<<<<<< HEAD
+
   <h1 class="mb-3 text-secondary">Posts by {{ view.kwargs.searchUser }} </h1>
-=======
   <h3 class="mb-3 text-secondary">Search Results:</h3>
->>>>>>> 2f3d2ef9d0383ac7b8ab3f00d0c88ad1fd0f494e
+
     {% for post in posts %}
         {% include 'blog/post.html' with post=post show_detail_link=True%}
     {% endfor %}
