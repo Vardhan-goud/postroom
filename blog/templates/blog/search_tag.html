@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-  <h3 class="mb-3 text-secondary">Search Results:</h3>
+  <h3 class="m-3 text-secondary">Search Results:</h3>
     {% for post in posts %}
         {% include 'blog/post.html' with post=post show_detail_link=True%}
     {% endfor %}
